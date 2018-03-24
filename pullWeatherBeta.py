@@ -3,7 +3,7 @@ import pyowm
 import time
 
 owm = pyowm.OWM('3cc9239f71004c1fa171a50d24e460e6')
-
+filePath = "/home/gbk/data/weatherTracker/"
 """
 file structure
 timeStamp,tempInFahrenheit['temp'],humidity,detailedStatus,rainVolume,wind-deg,wind-spe$
@@ -29,7 +29,7 @@ def buildRow(owm):
     return weatherRow
 
 theDate = time.strftime("%Y_%m_%d")
-weatherFile = theDate + "_weather_obs.txt"
+weatherFile = filePath + theDate + "_weather_obs.txt"
 delimiter = ','
 row = buildRow(owm)
 with open(weatherFile, 'a') as outFile:
