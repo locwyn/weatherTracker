@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+import time 
+import datetime
+
+def readFileIntoList(fileName):
+  with open(fileName) as dataFile:
+    recList = [line.rstrip("\n") for line in open(fileName)]
+    return recList
+        
+def parseData(testData):
+  for i in testData:
+#   splitRec = i.split(",")
+    print(i)
+    
+fileName = "2017_11_16_weather_obs_riv.txt"
+filePath = "/home/locwyn/data/weatherTracker/oldOWMData/"
+fullFileName = filePath + fileName
+
+testData = readFileIntoList(fullFileName)
+parseData(testData)
