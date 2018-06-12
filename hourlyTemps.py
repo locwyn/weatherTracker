@@ -9,8 +9,8 @@ def readFileIntoList(fileName):
         
 def parseData(testData):
   for i in testData:
-#   splitRec = i.split(",")
-    print(i)
+    splitRec = i.split(",")
+    print(splitRec[0])
     
 fileName = "2017_06_16_weather_obs_riv.txt"
 filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
