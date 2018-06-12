@@ -13,8 +13,10 @@ def parseData(testData):
     print(datetime.datetime.fromtimestamp(float(splitRec[0])).strftime('%H%M'))
     
     
-fileName = "2017_06_16_weather_obs_riv.txt"
-filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
+#fileName = "2017_06_16_weather_obs_riv.txt"
+#filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
+fileName = "seedStarterTemps20170616.txt"
+filePath = "/home/gbk/data/weatherTracker/seedStarter/"
 fullFileName = filePath + fileName
 
 testData = readFileIntoList(fullFileName)
