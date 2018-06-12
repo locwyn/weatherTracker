@@ -10,7 +10,7 @@ def readFileIntoList(fileName):
 def parseData(testData):
   for i in testData:
     splitRec = i.split(",")
-    print(datetime.datetime.fromtimestamp(splitRec[0]).strftime('%c'))
+    print(datetime.datetime.fromtimestamp(float(splitRec[0])).strftime('%c'))
     
     
 fileName = "2017_06_16_weather_obs_riv.txt"
