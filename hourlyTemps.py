@@ -10,13 +10,14 @@ def readFileIntoList(fileName):
 def parseData(testData):
   for i in testData:
     splitRec = i.split(",")
-    print(datetime.datetime.fromtimestamp(float(splitRec[0]) - 18000).strftime('%c'))
+    #print(datetime.datetime.fromtimestamp(float(splitRec[0]) - 18000).strftime('%c'))
+    print(datetime.datetime.fromtimestamp(float(splitRec[0])).strftime('%H%M') + ":" + splitRec[1])
     
     
-#fileName = "2017_06_16_weather_obs_riv.txt"
-#filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
-fileName = "seedStarterTemps20170616.txt"
-filePath = "/home/gbk/data/weatherTracker/seedStarter/"
+fileName = "2017_06_16_weather_obs_riv.txt"
+filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
+#fileName = "seedStarterTemps20170616.txt"
+#filePath = "/home/gbk/data/weatherTracker/seedStarter/"
 fullFileName = filePath + fileName
 
 testData = readFileIntoList(fullFileName)
