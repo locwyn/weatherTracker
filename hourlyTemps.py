@@ -12,8 +12,8 @@ def parseData(testData):
 #   splitRec = i.split(",")
     print(i)
     
-fileName = "2017_11_16_weather_obs_riv.txt"
-filePath = "/home/locwyn/data/weatherTracker/oldOWMData/"
+fileName = "2017_06_16_weather_obs_riv.txt"
+filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
 fullFileName = filePath + fileName
 
 testData = readFileIntoList(fullFileName)
