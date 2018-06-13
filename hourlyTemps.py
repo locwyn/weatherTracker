@@ -10,6 +10,7 @@ def readFileIntoList(fileName):
 def parseData(testData):
   numRecs = 0
   sumOfTemps = 0
+  averageTempForDay = 0
   for i in testData:
     splitRec = i.split(",")
     #print(datetime.datetime.fromtimestamp(float(splitRec[0]) - 18000).strftime('%c') + " : " + splitRec[3])
@@ -19,7 +20,8 @@ def parseData(testData):
       numRecs += 1
     except:
       pass
-  averageTempForDay = sumOfTemps / numRecs
+  if numRecs > 0:
+    averageTempForDay = sumOfTemps / numRecs
   return round(averageTempForDay, 2)
  
 def loopDateRange():
