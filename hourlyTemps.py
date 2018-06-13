@@ -19,12 +19,19 @@ def parseData(testData):
   averageTempForDay = sumOfTemps / numRecs
   return round(averageTempForDay, 2)
  
+def loopDateRange():
+  for i in range(60, 208):
+    processJulianDate = "2017" + str(i)
+    processRegDate = time.strftime("%Y_%m_%d", time.strptime(processJulianDate, "%Y%j"))
+    fileName = processRegDate + "_weather_obs_riv.txt"
+    filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
+    #fileName = "seedStarterTemps20170616.txt"
+    #filePath = "/home/gbk/data/weatherTracker/seedStarter/"
+    fullFileName = filePath + fileName
+    print(fileName)
 
-fileName = "2017_06_16_weather_obs_riv.txt"
-filePath = "/home/gbk/data/weatherTracker/oldOWMData/"
-#fileName = "seedStarterTemps20170616.txt"
-#filePath = "/home/gbk/data/weatherTracker/seedStarter/"
-fullFileName = filePath + fileName
+#testData = readFileIntoList(fullFileName)
+#print(parseData(testData))
 
-testData = readFileIntoList(fullFileName)
-print(parseData(testData))
+if __name__ == "__main__":
+  loopDateRange()
