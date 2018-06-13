@@ -33,7 +33,7 @@ def loopDateRange():
     #fileName = "seedStarterTemps20170616.txt"
     #filePath = "/home/gbk/data/weatherTracker/seedStarter/"
     fullFileName = filePath + fileName
-    print(processRegDate + " - " + str(parseData(fullFileName)))
+    print(processRegDate + " - " + str(parseData(readFileIntoList(fullFileName))))
 
 #testData = readFileIntoList(fullFileName)
 #print(parseData(testData))
