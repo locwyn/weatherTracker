@@ -17,7 +17,7 @@ def parseData(testData):
     numRecs += 1
     sumOfTemps += float(splitRec[1])
   averageTempForDay = sumOfTemps / numRecs
-  return averageTempForDay
+  return round(averageTempForDay, 2)
  
 
 fileName = "2017_06_16_weather_obs_riv.txt"
