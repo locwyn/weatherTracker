@@ -14,8 +14,11 @@ def parseData(testData):
     splitRec = i.split(",")
     #print(datetime.datetime.fromtimestamp(float(splitRec[0]) - 18000).strftime('%c') + " : " + splitRec[3])
     #print(datetime.datetime.fromtimestamp(float(splitRec[0])).strftime('%H%M') + ":" + splitRec[1])
-    numRecs += 1
-    sumOfTemps += float(splitRec[1])
+    try:
+      sumOfTemps += float(splitRec[1])
+      numRecs += 1
+    except:
+      pass
   averageTempForDay = sumOfTemps / numRecs
   return round(averageTempForDay, 2)
  
