@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
         
 
-,,,
+"""
 def checkDatabaseForItem(selectQuery):
   cnx = databaseConnect()
   cursor = cnx.cursor()
@@ -182,5 +182,5 @@ def writeErrorLog(e):
   except BaseException as e:
     with open(errorFile, 'a') as f:
       f.write("Unable to write error")
-,,,
+"""
 
