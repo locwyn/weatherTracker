@@ -9,6 +9,43 @@ def databaseConnect():
   return mysql.connector.connect(user=dbUser, password=dbPassword, 
            host=dbHost, database='weatherData')
 
+def createDBTable(tableName):
+  cnx = databaseConnect()
+  cursor = cnx.cursor()
+  tableQuery = ("CREATE TABLE " + tableName +
+                " (owmID INT AUTO_INCREMENT PRIMARY KEY, "
+                "timeStamp DECIMAL(12,2), "
+                "tempInFahrenheit DECIMAL(5,2), "
+                "humidity TINYINT, "
+                "detailedStatus TINYTEXT, "
+                "rainVolume DECIMAL(5,2), "
+                "windDirection SMALLINT, "
+                "windSpeed DECIMAL(4,1), "
+                "clouds TINYINT)")
+  try:
+    cursor.execute(tableQuery)
+  except mysql.connector.Error as e:
+    writeErrorLog(e)
+  cnx.close()
+ 
+def writeErrorLog(e):
+  filePath = '/home/gbk/data/weatherTracker/logs/'
+  errorFile = (filePath + datetime.datetime.now().strftime('%Y_%m_%d') + 
+              '_error.log')
+  try:
+    with open(errorFile, 'a') as f:
+      f.write(str(e))
+  except BaseException as e:
+    with open(errorFile, 'a') as f:
+      f.write("Unable to write error")
+
+if __name__ == "__main__":
+  tableName = "2017_owm_data"
+  createDBTable(tableName)
+
+        
+
+,,,
 def checkDatabaseForItem(selectQuery):
   cnx = databaseConnect()
   cursor = cnx.cursor()
@@ -145,20 +182,5 @@ def writeErrorLog(e):
   except BaseException as e:
     with open(errorFile, 'a') as f:
       f.write("Unable to write error")
-        
-if __name__ == "__main__":
-  filePath = '/home/gbk/data/makerScrape/'
-  previousDate = datetime.datetime.now() - timedelta(days=1)
-  fileName = (filePath + previousDate.strftime('%Y_%m_%d') 
-             + '_maker.json')
-  with open(fileName) as f:
-    tweets = f.readlines()
-  for y in tweets:
-    tweetJSON = json.loads(y)
-    if tweetJSON.get('retweeted_status'):
-      pass
-    else:
-      if checkForEnglish(tweetJSON):
-        loadTweetIntoDatabase(tweetJSON)
-        loadUserIntoDatabase(tweetJSON)
-        processHashtagData(tweetJSON)
+,,,
+
