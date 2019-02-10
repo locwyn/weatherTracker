@@ -40,7 +40,7 @@ def writeErrorLog(e):
       f.write("Unable to write error")
 
 if __name__ == "__main__":
-  tableName = "2017_owm_data"
+  tableName = "test_owm_data"
   createDBTable(tableName)
 
 

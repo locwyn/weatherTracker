@@ -19,7 +19,7 @@ def parseFileRecords(splitRec):
   humidity = int(splitRec[2])
   detailedStatus = str(splitRec[3])
   rainVol = float(splitRec[4])
-  windDeg = int(splitRec[5])
+  windDeg = int(round(float(splitRec[5])))
   windSpeed = float(splitRec[6])
   clouds = int(splitRec[7])
   values = (timeStamp, temp, humidity,
@@ -32,10 +32,10 @@ def loadRecordIntoDatabase(tableName, recList):
   cnx = databaseConnect()
   cursor = cnx.cursor()
   recQuery = ("INSERT INTO " + tableName +
-                " (owmID, timeStamp, tempInFahrenheit, "
+                " (timeStamp, tempInFahrenheit, "
                 "humidity, detailedStatus, rainVolume, "
                 "windDirection, windSpeed, clouds) "
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)")
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
   try:
     cursor.execute(recQuery, values)
     cnx.commit()
@@ -49,10 +49,10 @@ def writeErrorLog(e):
               '_error.log')
   try:
     with open(errorFile, 'a') as f:
-      f.write(str(e))
+      f.write(str(e) + "\n")
   except BaseException as e:
     with open(errorFile, 'a') as f:
-      f.write("Unable to write error")
+      f.write("Unable to write error\n")
 
 if __name__ == "__main__":
   filePath = "/home/gbk/data/weatherTracker/"
