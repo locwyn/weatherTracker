@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#job to load data from one flat file into one DB table
+#job to load data from a year's worth of flat files into DB
 import datetime
 from datetime import timedelta
 import mysql.connector
