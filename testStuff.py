@@ -5,10 +5,10 @@ import time
 #testJulian = time.strptime("2019001", "%Y%j")
 #print time.strftime("%Y_%m_%d", testJulian)
 
-leapYear = 0
-theYear = 2018
+leapYear = 1
+theYear = 2016
 filePath = "/home/gbk/data/weatherTracker/"
-for i in range(1, 356 + leapYear):
+for i in range(1, 366 + leapYear):
   fileDate = time.strftime("%Y_%m_%d", time.strptime(str(theYear) + str(i), "%Y%j"))
   fileName = fileDate + "_weather_obs.txt"
   fullFileName = filePath + fileName
