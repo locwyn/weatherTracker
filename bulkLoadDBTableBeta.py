@@ -12,8 +12,16 @@ def databaseConnect():
            host=dbHost, database='weatherData')
 
 def bulkLoadforYear(theYear, leapYear):
+  filePath = "/home/gbk/data/weatherTracker/"
   for i in range(1, 356 + leapYear):
     
+    fileName = "2019_02_01_weather_obs.txt"
+    fullFileName = filePath + fileName
+    tableName = "test_owm_data"
+    recList = readFileIntoList(fullFileName)
+    for j in recList:
+      splitRec = j.split(',')
+      loadRecordIntoDatabase(tableName, parseFileRecords(splitRec))
 
 def readFileIntoList(fullFileName):
   with open(fullFileName) as dataFile:
@@ -62,11 +70,4 @@ def writeErrorLog(e):
       f.write("Unable to write error\n")
 
 if __name__ == "__main__":
-  filePath = "/home/gbk/data/weatherTracker/"
-  fileName = "2019_02_01_weather_obs.txt"
-  fullFileName = filePath + fileName
-  tableName = "test_owm_data"
-  recList = readFileIntoList(fullFileName)
-  for i in recList:
-    splitRec = i.split(',')
-    loadRecordIntoDatabase(tableName, parseFileRecords(splitRec))
+  
