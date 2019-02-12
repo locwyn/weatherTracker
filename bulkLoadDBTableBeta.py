@@ -3,12 +3,17 @@
 #job to load data from a year's worth of flat files into DB
 import datetime
 from datetime import timedelta
+import time
 import mysql.connector
 from credentials import *
 
 def databaseConnect():
   return mysql.connector.connect(user=dbUser, password=dbPassword,
            host=dbHost, database='weatherData')
+
+def bulkLoadforYear(theYear, leapYear):
+  for i in range(1, 356 + leapYear):
+    
 
 def readFileIntoList(fullFileName):
   with open(fullFileName) as dataFile:
