@@ -14,8 +14,8 @@ def databaseConnect():
 def bulkLoadforYear(theYear, leapYear):
   filePath = "/home/gbk/data/weatherTracker/"
   for i in range(1, 356 + leapYear):
-    
-    fileName = "2019_02_01_weather_obs.txt"
+    fileDate = time.strftime("%Y_%m_%d", time.strptime(str(theYear) + str(i), "%Y%j"))
+    fileName = fileDate + "_weather_obs.txt"
     fullFileName = filePath + fileName
     tableName = "test_owm_data"
     recList = readFileIntoList(fullFileName)
