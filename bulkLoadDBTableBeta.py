@@ -11,7 +11,7 @@ def databaseConnect():
   return mysql.connector.connect(user=dbUser, password=dbPassword,
            host=dbHost, database='weatherData')
 
-def bulkLoadforYear(theYear, leapYear):
+def bulkLoadForYear(theYear, leapYear):
   filePath = "/home/gbk/data/weatherTracker/"
   for i in range(1, 366 + leapYear):
     fileDate = time.strftime("%Y_%m_%d", time.strptime(str(theYear) + str(i), "%Y%j"))
@@ -28,11 +28,13 @@ def readFileIntoList(fullFileName):
     with open(fullFileName) as dataFile:
       recList = [line.rstrip("\n") for line in open(fullFileName)]
       return recList
-  except FileNotFoundError as e:
+  except:
     filePath = '/home/gbk/data/weatherTracker/logs/'
     errorFile = filePath + "missingData.txt"
     with open(errorFile, 'a') as f:
-      f.write(fullFilename + "\n")
+      f.write(fullFileName + "\n")
+    recList = []
+    return recList
     
 def parseFileRecords(splitRec):
   timeStamp = float(splitRec[0])
