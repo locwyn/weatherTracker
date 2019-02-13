@@ -24,10 +24,16 @@ def bulkLoadforYear(theYear, leapYear):
       loadRecordIntoDatabase(tableName, parseFileRecords(splitRec))
 
 def readFileIntoList(fullFileName):
-  with open(fullFileName) as dataFile:
-    recList = [line.rstrip("\n") for line in open(fullFileName)]
-    return recList
-
+  try:
+    with open(fullFileName) as dataFile:
+      recList = [line.rstrip("\n") for line in open(fullFileName)]
+      return recList
+  except FileNotFoundError as e:
+    filePath = '/home/gbk/data/weatherTracker/logs/'
+    errorFile = filePath + "missingData.txt"
+    with open(errorFile, 'a') as f:
+      f.write(fullFilename + "\n")
+    
 def parseFileRecords(splitRec):
   timeStamp = float(splitRec[0])
   temp = float(splitRec[1])
