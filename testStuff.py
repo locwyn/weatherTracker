@@ -6,10 +6,12 @@ from credentials import *
 #testJulian = time.strptime("2019001", "%Y%j")
 #print time.strftime("%Y_%m_%d", testJulian)
 
+testDate = datetime.date(2019, 01, 01)
+
 myLat = 39.857979
 myLong = -89.544616
 
-forecast = forecastio.load_forecast(darkSkyKey, myLat, myLong)
+forecast = forecastio.load_forecast(darkSkyKey, myLat, myLong, time=testDate)
 byHour = forecast.hourly()
 print byHour.summary
 
