@@ -12,8 +12,11 @@ myLat = 39.857979
 myLong = -89.544616
 
 forecast = forecastio.load_forecast(darkSkyKey, myLat, myLong, time=testDate)
-byHour = forecast.hourly()
-print byHour.summary
+byDay = forecast.daily()
+for dataPoint in byDay.data:
+  print dataPoint.icon
+  print dataPoint.moonPhase
+  print dataPoint.dewPoint
 
 
 
