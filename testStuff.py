@@ -6,8 +6,8 @@ from credentials import *
 #testJulian = time.strptime("2019001", "%Y%j")
 #print time.strftime("%Y_%m_%d", testJulian)
 
-testDate = datetime.date(2019, 01, 01)
-
+testDate = datetime.datetime(2019, 01, 01)
+print testDate
 myLat = 39.857979
 myLong = -89.544616
 
