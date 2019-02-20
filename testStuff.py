@@ -14,9 +14,9 @@ myLong = -89.544616
 forecast = forecastio.load_forecast(darkSkyKey, myLat, myLong, time=testDate)
 byDay = forecast.daily()
 for dataPoint in byDay.data:
-  print dataPoint.icon
-  print dataPoint.moonPhase
-  print dataPoint.dewPoint
+  print dataPoint.windSpeed
+  print dataPoint.windBearing
+  print dataPoint.cloudCover
 
 
 
