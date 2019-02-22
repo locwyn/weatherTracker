@@ -41,22 +41,35 @@ def writePrecipFile(dayDetails):
   fileWrite(row, precipFile)
 
 def writeTempFile(dayDetails):
+  row = []
+  tempFile = "darkSkyTemps.txt"
   for dataPoint in dayDetails.data:
-    dayTime = str(dataPoint.time)
-    daySummary = dataPoint.summary
-    dayIcon = dataPoint.dayIcon
-    daySunriseTime = str(dataPoint.sunriseTime)
-    daySunsetTime = str(dataPoint.sunsetTime)
-    dayMoonPhase = str(dataPoint.moonPhase)
-    dayTemperatureHigh = str(dataPoint.temperatureHigh)
-    dayTemperatureHighTime = str(dataPoint.temperatureHighTime)
-    dayTemperatureLow = str(dataPoint.temperatureLow)
-    dayTemperatureLowTime = str(dataPoint.temperatureLowTime)
-    dayAppTemperatureHigh = str(dataPoint.apparentTemperatureHigh)
-    dayAppTemperatureHighTime = str(dataPoint.apparentTemperatureHighTime)
-    dayAppTemperatureLow = str(dataPoint.apparentTemperatureLow)
-    dayAppTemperatureLowTime = str(dataPoint.apparentTemperatureLowTime)
-    
+    row.append(str(dataPoint.time))
+    row.append(dataPoint.summary)
+    row.append(dataPoint.dayIcon)
+    row.append(str(dataPoint.sunriseTime))
+    row.append(str(dataPoint.sunsetTime))
+    row.append(str(dataPoint.moonPhase))
+    row.append(str(dataPoint.temperatureHigh))
+    row.append(str(dataPoint.temperatureHighTime))
+    row.append(str(dataPoint.temperatureLow))
+    row.append(str(dataPoint.temperatureLowTime))
+    row.append(str(dataPoint.apparentTemperatureHigh))
+    row.append(str(dataPoint.apparentTemperatureHighTime))
+    row.append(str(dataPoint.apparentTemperatureLow))
+    row.append(str(dataPoint.apparentTemperatureLowTime))
+    row.append(str(datePoint.dewPoint))
+    row.append(str(datePoint.humidty))
+    row.append(str(datePoint.pressure))
+    row.append(str(dataPoint.temperatureMax))
+    row.append(str(dataPoint.temperatureMaxTime))
+    row.append(str(dataPoint.temperatureMin))
+    row.append(str(dataPoint.temperatureMinTime))
+    row.append(str(dataPoint.apparentTemperatureMax))
+    row.append(str(dataPoint.apparentTemperatureMaxTime))
+    row.append(str(dataPoint.apparentTemperatureMin))
+    row.append(str(dataPoint.apparentTemperatureMinTime))
+  fileWrite(row, tempFile)
 
 
 #def writeGreenEnergyFile():
