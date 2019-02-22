@@ -71,9 +71,19 @@ def writeTempFile(dayDetails):
     row.append(str(dataPoint.apparentTemperatureMinTime))
   fileWrite(row, tempFile)
 
-
-#def writeGreenEnergyFile():
-
+def writeGreenEnergyFile(dayDetails):
+  row = []
+  greenFile = "darkSkyGreenEnergy.txt"
+  for dataPoint in dayDetails.data:
+    row.append(str(dataPoint.time))
+    row.append(dataPoint.windSpeed)
+    row.append(dataPoint.windBearing)
+    row.append(dataPoint.cloudCover)
+    row.append(dataPoint.uvIndex)
+    row.append(dataPoint.uvIndexTime)
+    row.append(dataPoint.visibility)
+  fileWrite(row, greenFile)
+    
 def cycleDaysOfYear(leapYear, theYear, filePath, myLat, myLong):
   for i in range(1, 366 + leapYear):
     fileDate = time.strftime("Y_%m_%d", time.strptime(str(theYear) + str(i),
@@ -88,4 +98,4 @@ if __name__ == "__main__":
   pullDate = datetime.datetime(2019, 01, 11)
   filePath = "/home/gbk/data/weatherTracker/"
   dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
-  writeTempFile(dayDetails)
+  writeGreenEnergyFile(dayDetails)
