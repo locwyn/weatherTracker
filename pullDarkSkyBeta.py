@@ -72,7 +72,7 @@ if __name__ == "__main__":
   myLong = -89.544616
   leapYear = 0
   theYear = 2018
-  pullDate = datetime.datetime(2019, 01, 12)
+  pullDate = datetime.datetime(2019, 01, 11)
   filePath = "/home/gbk/data/weatherTracker/"
   dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
   writePrecipFile(dayDetails)
