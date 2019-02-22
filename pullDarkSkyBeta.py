@@ -16,7 +16,7 @@ def pullDarkSkyData(myLat, myLong, pullDate):
 def writePrecipFile(dayDetails):
   row = []
   for dataPoint in dayDetails.data:
-    row.extend(str(dataPoint.time))
+    row.append(str(dataPoint.time))
     dayPrecipIntensity = str(dataPoint.precipIntensity)
     dayPrecipIntensityMax = str(dataPoint.precipIntensityMax)
     try:
