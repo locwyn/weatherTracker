@@ -76,12 +76,12 @@ def writeGreenEnergyFile(dayDetails):
   greenFile = "darkSkyGreenEnergy.txt"
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
-    row.append(dataPoint.windSpeed)
-    row.append(dataPoint.windBearing)
-    row.append(dataPoint.cloudCover)
-    row.append(dataPoint.uvIndex)
-    row.append(dataPoint.uvIndexTime)
-    row.append(dataPoint.visibility)
+    row.append(str(dataPoint.windSpeed))
+    row.append(str(dataPoint.windBearing))
+    row.append(str(dataPoint.cloudCover))
+    row.append(str(dataPoint.uvIndex))
+    row.append(str(dataPoint.uvIndexTime))
+    row.append(str(dataPoint.visibility))
   fileWrite(row, greenFile)
     
 def cycleDaysOfYear(leapYear, theYear, filePath, myLat, myLong):
