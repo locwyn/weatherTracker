@@ -17,24 +17,24 @@ def writePrecipFile(dayDetails):
   row = []
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
-    dayPrecipIntensity = str(dataPoint.precipIntensity)
-    dayPrecipIntensityMax = str(dataPoint.precipIntensityMax)
+    row.append(str(dataPoint.precipIntensity))
+    row.append(str(dataPoint.precipIntensityMax))
     try:
-      dayPrecipIntensityMaxTime = str(dataPoint.precipIntensityMaxTime)
+      row.append(str(dataPoint.precipIntensityMaxTime))
     except:
-      dayPrecipIntensityMaxTime = "0"
-    dayPrecipProbability = str(dataPoint.precipProbability)
+      row.append("0")
+    row.append(str(dataPoint.precipProbability))
     try:
-      dayPrecipAccumulation = str(dataPoint.precipAccumulation)
+      row.append(str(dataPoint.precipAccumulation))
     except:
-      dayPrecipAccumulation = "0"
+      row.append("0")
     try:
-      dayPrecipType = str(dataPoint.precipType)
+      row.append(str(dataPoint.precipType))
     except:
-      dayPrecipType = "None"
-  row.extend([dayPrecipIntensity, dayPrecipIntensityMax])
-  row.extend([dayPrecipIntensityMaxTime, dayPrecipProbability])
-  row.extend([dayPrecipAccumulation, dayPrecipType])
+      row.append("None")
+  #row.extend([dayPrecipIntensity, dayPrecipIntensityMax])
+  #row.extend([dayPrecipIntensityMaxTime, dayPrecipProbability])
+  #row.extend([dayPrecipAccumulation, dayPrecipType])
   delimiter = ","
   precipFile = "darkSkyPrecip.txt"
   with open(precipFile, 'a') as pf:
