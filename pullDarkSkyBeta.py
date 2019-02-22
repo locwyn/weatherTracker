@@ -88,4 +88,4 @@ if __name__ == "__main__":
   pullDate = datetime.datetime(2019, 01, 11)
   filePath = "/home/gbk/data/weatherTracker/"
   dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
-  writePrecipFile(dayDetails)
+  writeTempFile(dayDetails)
