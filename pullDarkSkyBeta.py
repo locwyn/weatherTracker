@@ -14,8 +14,9 @@ def pullDarkSkyData(myLat, myLong, pullDate):
   return dayDetails
 
 def writePrecipFile(dayDetails):
+  row = []
   for dataPoint in dayDetails.data:
-    dayTime = str(dataPoint.time)
+    row.extend(str(dataPoint.time))
     dayPrecipIntensity = str(dataPoint.precipIntensity)
     dayPrecipIntensityMax = str(dataPoint.precipIntensityMax)
     try:
@@ -31,8 +32,7 @@ def writePrecipFile(dayDetails):
       dayPrecipType = str(dataPoint.precipType)
     except:
       dayPrecipType = "None"
-  row = []
-  row.extend([dayTime, dayPrecipIntensity, dayPrecipIntensityMax])
+  row.extend([dayPrecipIntensity, dayPrecipIntensityMax])
   row.extend([dayPrecipIntensityMaxTime, dayPrecipProbability])
   row.extend([dayPrecipAccumulation, dayPrecipType])
   delimiter = ","
