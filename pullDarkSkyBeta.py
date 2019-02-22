@@ -10,19 +10,54 @@ from credentials import *
 
 def pullDarkSkyData(myLat, myLong, pullDate):
   forecast = forecastio.load_forecast(darkSkyKey, myLat, myLong, time=pullDate)
-  byDay = forecast.daily()
-  for dataPoint in byDay.data:
-    print dataPoint.time
-    print dataPoint.summary
-    print dataPoint.icon
-    print dataPoint.sunriseTime
-    print dataPoint.sunsetTime
-    print dataPoint.moonPhase
-    print dataPoint.temperatureHigh
+  dayDetails = forecast.daily()
+  return dayDetails
 
-#def writePrecipFile():
+def writePrecipFile(dayDetails):
+  for dataPoint in dayDetails.data:
+    dayTime = str(dataPoint.time)
+    dayPrecipIntensity = str(dataPoint.precipIntensity)
+    dayPrecipIntensityMax = str(dataPoint.precipIntensityMax)
+    try:
+      dayPrecipIntensityMaxTime = str(dataPoint.precipIntensityMaxTime)
+    except:
+      dayPrecipIntensityMaxTime = "0"
+    dayPrecipProbability = str(dataPoint.precipProbability)
+    try:
+      dayPrecipAccumulation = str(dataPoint.precipAccumulation)
+    except:
+      dayPrecipAccumulation = "0"
+    try:
+      dayPrecipType = str(dataPoint.precipType)
+    except:
+      dayPrecipType = "None"
+  row = []
+  row.extend([dayTime, dayPrecipIntensity, dayPrecipIntensityMax])
+  row.extend([dayPrecipIntensityMaxTime, dayPrecipProbability])
+  row.extend([dayPrecipAccumulation, dayPrecipType])
+  delimiter = ","
+  precipFile = "darkSkyPrecip.txt"
+  with open(precipFile, 'a') as pf:
+      pf.write(delimiter.join(row) + '\n')
 
-#def writeTempFile():
+def writeTempFile(dayDetails):
+  for dataPoint in dayDetails.data:
+    dayTime = str(dataPoint.time)
+    daySummary = dataPoint.summary
+    dayIcon = dataPoint.dayIcon
+    daySunriseTime = str(dataPoint.sunriseTime)
+    daySunsetTime = str(dataPoint.sunsetTime)
+    dayMoonPhase = str(dataPoint.moonPhase)
+    dayTemperatureHigh = str(dataPoint.temperatureHigh)
+    dayTemperatureHighTime = str(dataPoint.temperatureHighTime)
+    dayTemperatureLow = str(dataPoint.temperatureLow)
+    dayTemperatureLowTime = str(dataPoint.temperatureLowTime)
+    dayAppTemperatureHigh = str(dataPoint.apparentTemperatureHigh)
+    dayAppTemperatureHighTime = str(dataPoint.apparentTemperatureHighTime)
+    dayAppTemperatureLow = str(dataPoint.apparentTemperatureLow)
+    dayAppTemperatureLowTime = str(dataPoint.apparentTemperatureLowTime)
+    
+
 
 #def writeGreenEnergyFile():
 
@@ -37,6 +72,7 @@ if __name__ == "__main__":
   myLong = -89.544616
   leapYear = 0
   theYear = 2018
-  pullDate = datetime.datetime(2019, 01, 01)
+  pullDate = datetime.datetime(2019, 01, 12)
   filePath = "/home/gbk/data/weatherTracker/"
-  pullDarkSkyData(myLat, myLong, pullDate)
+  dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
+  writePrecipFile(dayDetails)
