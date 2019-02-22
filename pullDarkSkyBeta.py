@@ -13,6 +13,11 @@ def pullDarkSkyData(myLat, myLong, pullDate):
   dayDetails = forecast.daily()
   return dayDetails
 
+def fileWrite(row, fileName):
+  delimiter = ","
+  with open(fileName, 'a') as f:
+      f.write(delimiter.join(row) + '\n')
+
 def writePrecipFile(dayDetails):
   row = []
   for dataPoint in dayDetails.data:
@@ -32,13 +37,8 @@ def writePrecipFile(dayDetails):
       row.append(str(dataPoint.precipType))
     except:
       row.append("None")
-  #row.extend([dayPrecipIntensity, dayPrecipIntensityMax])
-  #row.extend([dayPrecipIntensityMaxTime, dayPrecipProbability])
-  #row.extend([dayPrecipAccumulation, dayPrecipType])
-  delimiter = ","
   precipFile = "darkSkyPrecip.txt"
-  with open(precipFile, 'a') as pf:
-      pf.write(delimiter.join(row) + '\n')
+  fileWrite(row, precipFile)
 
 def writeTempFile(dayDetails):
   for dataPoint in dayDetails.data:
