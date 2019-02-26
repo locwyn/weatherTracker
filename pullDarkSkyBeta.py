@@ -18,7 +18,7 @@ def fileWrite(row, fileName):
   with open(fileName, 'a') as f:
       f.write(delimiter.join(row) + '\n')
 
-def writePrecipFile(dayDetails):
+def writePrecipFile(dayDetails, theYear):
   row = []
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
@@ -37,12 +37,12 @@ def writePrecipFile(dayDetails):
       row.append(str(dataPoint.precipType))
     except:
       row.append("None")
-  precipFile = "darkSkyPrecip.txt"
+  precipFile = str(theYear) + "darkSkyPrecip.txt"
   fileWrite(row, precipFile)
 
-def writeTempFile(dayDetails):
+def writeTempFile(dayDetails, theYear):
   row = []
-  tempFile = "darkSkyTemps.txt"
+  tempFile = str(theYear) + "darkSkyTemps.txt"
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
     row.append(dataPoint.summary)
@@ -71,9 +71,9 @@ def writeTempFile(dayDetails):
     row.append(str(dataPoint.apparentTemperatureMinTime))
   fileWrite(row, tempFile)
 
-def writeGreenEnergyFile(dayDetails):
+def writeGreenEnergyFile(dayDetails, theYear):
   row = []
-  greenFile = "darkSkyGreenEnergy.txt"
+  greenFile = str(theYear) + "darkSkyGreenEnergy.txt"
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
     row.append(str(dataPoint.windSpeed))
@@ -83,12 +83,16 @@ def writeGreenEnergyFile(dayDetails):
     row.append(str(dataPoint.uvIndexTime))
     row.append(str(dataPoint.visibility))
   fileWrite(row, greenFile)
-    
+
 def cycleDaysOfYear(leapYear, theYear, filePath, myLat, myLong):
-  for i in range(1, 366 + leapYear):
-    fileDate = time.strftime("Y_%m_%d", time.strptime(str(theYear) + str(i),
-                             "%Y_%j"))
-    fileName = fileDate + "_darkSkyData.txt"
+  for i in range(1, 10 + leapYear):
+    pullDate = datetime.datetime.strptime(str(theYear) + str(i).zfill(3),
+               "%Y%j")
+    dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
+    writePrecipFile(dayDetails, theYear)
+    writeTempFile(dayDetails, theYear)
+    writeGreenEnergyFile(dayDetails, theYear)
+
 
 if __name__ == "__main__":
   myLat = 39.857979
@@ -97,5 +101,6 @@ if __name__ == "__main__":
   theYear = 2018
   pullDate = datetime.datetime(2019, 01, 11)
   filePath = "/home/gbk/data/weatherTracker/"
-  dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
-  writeGreenEnergyFile(dayDetails)
+  #dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
+  #writeGreenEnergyFile(dayDetails)
+  cycleDaysOfYear(leapYear, theYear, filePath, myLat, myLong)
