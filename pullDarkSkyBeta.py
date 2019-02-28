@@ -5,8 +5,6 @@ import datetime
 import time
 import forecastio
 from credentials import *
-#testJulian = time.strptime("2019001", "%Y%j")
-#print time.strftime("%Y_%m_%d", testJulian)
 
 def pullDarkSkyData(myLat, myLong, pullDate):
   forecast = forecastio.load_forecast(darkSkyKey, myLat, myLong, time=pullDate)
@@ -14,12 +12,15 @@ def pullDarkSkyData(myLat, myLong, pullDate):
   return dayDetails
 
 def fileWrite(row, fileName):
+  filePath = "/home/gbk/data/weatherTracker/darkSky/"
+  fullFileName = filePath + fileName
   delimiter = ","
-  with open(fileName, 'a') as f:
+  with open(fullFileName, 'a') as f:
       f.write(delimiter.join(row) + '\n')
 
 def writePrecipFile(dayDetails, theYear):
   row = []
+  precipFile = str(theYear) + "darkSkyPrecip.txt"
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
     row.append(str(dataPoint.precipIntensity))
@@ -37,12 +38,11 @@ def writePrecipFile(dayDetails, theYear):
       row.append(str(dataPoint.precipType))
     except:
       row.append("None")
-  precipFile = str(theYear) + "darkSkyPrecip.txt"
   fileWrite(row, precipFile)
 
-def writeTempFile(dayDetails, theYear):
+def writeTempsFile(dayDetails, theYear):
   row = []
-  tempFile = str(theYear) + "darkSkyTemps.txt"
+  tempsFile = str(theYear) + "darkSkyTemps.txt"
   for dataPoint in dayDetails.data:
     row.append(str(dataPoint.time))
     row.append(dataPoint.summary)
@@ -69,7 +69,7 @@ def writeTempFile(dayDetails, theYear):
     row.append(str(dataPoint.apparentTemperatureMaxTime))
     row.append(str(dataPoint.apparentTemperatureMin))
     row.append(str(dataPoint.apparentTemperatureMinTime))
-  fileWrite(row, tempFile)
+  fileWrite(row, tempsFile)
 
 def writeGreenEnergyFile(dayDetails, theYear):
   row = []
@@ -84,23 +84,18 @@ def writeGreenEnergyFile(dayDetails, theYear):
     row.append(str(dataPoint.visibility))
   fileWrite(row, greenFile)
 
-def cycleDaysOfYear(leapYear, theYear, filePath, myLat, myLong):
-  for i in range(1, 10 + leapYear):
+def cycleDaysOfYear(leapYear, theYear, myLat, myLong):
+  for i in range(1, 366 + leapYear):
     pullDate = datetime.datetime.strptime(str(theYear) + str(i).zfill(3),
                "%Y%j")
     dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
     writePrecipFile(dayDetails, theYear)
-    writeTempFile(dayDetails, theYear)
+    writeTempsFile(dayDetails, theYear)
     writeGreenEnergyFile(dayDetails, theYear)
-
 
 if __name__ == "__main__":
   myLat = 39.857979
   myLong = -89.544616
   leapYear = 0
   theYear = 2018
-  pullDate = datetime.datetime(2019, 01, 11)
-  filePath = "/home/gbk/data/weatherTracker/"
-  #dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
-  #writeGreenEnergyFile(dayDetails)
-  cycleDaysOfYear(leapYear, theYear, filePath, myLat, myLong)
+  cycleDaysOfYear(leapYear, theYear, myLat, myLong)
