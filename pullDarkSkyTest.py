@@ -98,4 +98,8 @@ if __name__ == "__main__":
   myLong = -89.544616
   leapYear = 0
   theYear = 2018
-  cycleDaysOfYear(leapYear, theYear, myLat, myLong)
+  pullDate = datetime.datetime(2018, 29, 10)
+  #cycleDaysOfYear(leapYear, theYear, myLat, myLong)
+  dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
+  writeTempsFile(dayDetails, theYear)
+  
