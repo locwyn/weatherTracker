@@ -52,12 +52,24 @@ def writeTempsFile(dayDetails, theYear):
     row.append(str(dataPoint.moonPhase))
     row.append(str(dataPoint.temperatureHigh))
     row.append(str(dataPoint.temperatureHighTime))
-    row.append(str(dataPoint.temperatureLow))
-    row.append(str(dataPoint.temperatureLowTime))
+    try:
+      row.append(str(dataPoint.temperatureLow))
+    except:
+      row.append('na')
+    try:
+      row.append(str(dataPoint.temperatureLowTime))
+    except:
+      row.append('na')
     row.append(str(dataPoint.apparentTemperatureHigh))
     row.append(str(dataPoint.apparentTemperatureHighTime))
-    row.append(str(dataPoint.apparentTemperatureLow))
-    row.append(str(dataPoint.apparentTemperatureLowTime))
+    try:
+      row.append(str(dataPoint.apparentTemperatureLow))
+    except:
+      row.append('na')
+    try:
+      row.append(str(dataPoint.apparentTemperatureLowTime))
+    except:
+      row.append('na')
     row.append(str(dataPoint.dewPoint))
     row.append(str(dataPoint.humidity))
     row.append(str(dataPoint.pressure))
