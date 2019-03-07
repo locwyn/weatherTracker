@@ -12,11 +12,11 @@ def pullDarkSkyData(myLat, myLong, pullDate):
   return dayDetails
 
 def fileWrite(row, fileName):
-  filePath = "/home/gbk/data/weatherTracker/darkSky/"
+  filePath = "/home/gbk/data/weatherTracker/darkSky/test/"
   fullFileName = filePath + fileName
   delimiter = ","
   with open(fullFileName, 'a') as f:
-      f.write(delimiter.join(row) + '\n')
+      f.write(delimiter.join(row).encode('utf-8') + '\n')
 
 def writePrecipFile(dayDetails, theYear):
   row = []
@@ -109,8 +109,8 @@ if __name__ == "__main__":
   myLat = 39.857979
   myLong = -89.544616
   leapYear = 0
-  theYear = 2018
-  pullDate = datetime.datetime(2018, 10, 29)
+  theYear = 2015
+  pullDate = datetime.datetime(2015, 3, 1)
   #cycleDaysOfYear(leapYear, theYear, myLat, myLong)
   dayDetails = pullDarkSkyData(myLat, myLong, pullDate)
   writeTempsFile(dayDetails, theYear)

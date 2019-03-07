@@ -16,7 +16,7 @@ def fileWrite(row, fileName):
   fullFileName = filePath + fileName
   delimiter = ","
   with open(fullFileName, 'a') as f:
-      f.write(delimiter.join(row) + '\n')
+      f.write(delimiter.join(row).encode('utf-8') + '\n')
 
 def writePrecipFile(dayDetails, theYear):
   row = []
@@ -109,5 +109,5 @@ if __name__ == "__main__":
   myLat = 39.857979
   myLong = -89.544616
   leapYear = 0
-  theYear = 2018
+  theYear = 2014
   cycleDaysOfYear(leapYear, theYear, myLat, myLong)
